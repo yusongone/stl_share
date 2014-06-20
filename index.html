@@ -1,9 +1,15 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
     <head>
         <title>stl viewer</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <script src="/public/js/vendor/jquery-2.1.1.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r67/three.min.js"></script>
+        <script src="/public/js/vendor/stats.js"></script>
+        <script src="/public/js/vendor/OrbitControls.js"></script>
+        <script src="/public/js/parse_stl.js"></script>
+        <script src="/public/js/index.js"></script>
         <style>
             body {
                 font-family: Monospace;
@@ -13,126 +19,14 @@
             }
         </style>
     </head>
-    <body>
-        <script src="three.js"></script>
-        <script src="stats.js"></script>
-        <script src="parse_stl.js"></script>
         <script>
-            var MeshList=[];
-            var camera, scene, renderer,
-               stats;
-            
-            init();
-            animate();
-
-            function createAMesh(geo){
-                var mesh = new THREE.Mesh( 
-                    geo, // new THREE.MeshNormalMaterial({
-                    //     overdraw:true
-                    // }
-                    new THREE.MeshLambertMaterial({
-                        overdraw:true,
-                        color: 0x688CA3,
-                        shading: THREE.FlatShading
-                    }
-                ));
-                MeshList.push(mesh);
-                return mesh;
-            }
-
-            function init() {
-
-                //Detector.addGetWebGLMessage();
-
-                scene = new THREE.Scene();
-
-                camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
-                camera.position.z = 80;
-                camera.position.y = 10;
-                camera.position.x = 10;
-                //camera.rotation.y =Math.PI/360*180;
-                scene.add( camera );
-                window.scene=scene;
-                window.camera=camera;
-
-                var directionalLight = new THREE.DirectionalLight( 0xffffff );
-                directionalLight.position.x = 0; 
-                directionalLight.position.y = 0; 
-                directionalLight.position.z = 1; 
-                directionalLight.position.normalize();
-                scene.add( directionalLight );
-                
-                getStlFile("Octocat-v1.stl");
-                //getStlFile("3DR_Extruder_body_V2_Test_001_RTP.stl");
-                //getStlFile("brackets.stl");
-
-                renderer = new THREE.WebGLRenderer({antialias:true}); 
-                //renderer = new THREE.CanvasRenderer();
-                renderer.setSize( window.innerWidth, window.innerHeight );
-
-                document.body.appendChild( renderer.domElement );
-
-                stats = new Stats();
-                stats.domElement.style.position = 'absolute';
-                stats.domElement.style.top = '0px';
-                document.body.appendChild(stats.domElement);
-            }
-
-            function animate() {
-                // note: three.js includes requestAnimationFrame shim
-                requestAnimationFrame( animate );
-                render();
-                //stats.update();
-            }
-
-            var t=0;
-            function render() {
-                //mesh.rotation.x += 0.01;
-                
-                for(var i=0;i<MeshList.length;i++){
-                    if (MeshList[i]) {
-                        MeshList[i].rotation.z += 0.02;
-                    }
-                }
-                renderer.render( scene, camera );
-
-            }
-            
-            function getStlFile(path){
-                var xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function () {
-                    if ( xhr.readyState == 4 ) {
-                        if ( xhr.status == 200 || xhr.status == 0 ) {
-                            var rep = xhr.response; // || xhr.mozResponseArrayBuffer;
-                            console.dir(rep);
-                            var geo=ParseStl.parseStlBinary(rep);
-                            var mesh=createAMesh(geo);
-                            //parseStl(xhr.responseText);
-                            mesh.position.x = 0;
-                            mesh.position.y = 0;
-                            mesh.position.z = 0;
-                            mesh.rotation.x= 5;
-                            mesh.rotation.y= 0;
-                            mesh.rotation.z= 0;
-                            scene.add(mesh);
-                            console.log('done parsing');
-                        }
-                    }
-                }
-                xhr.onerror = function(e) {
-                    console.log(e);
-                }
-                
-                //xhr.open( "GET", 'Octocat-v1.stl', true );
-                xhr.open( "GET", path, true );
-                xhr.responseType = "arraybuffer";
-                //xhr.setRequestHeader("Accept","text/plain");
-                //xhr.setRequestHeader("Content-Type","text/plain");
-                //xhr.setRequestHeader('charset', 'x-user-defined');
-                xhr.send( null );
-                
-                }
 
         </script>
+    <body>
+        <div class="page">
+            <input type="file" value="选择文件" id="file"/>
+            <div id="window">
+            </div>
+        </div> 
     </body>
 </html>
