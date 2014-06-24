@@ -17,14 +17,11 @@ _parseStl.parseStl=function(file,callback) {
 		return function(e) {
 			// Render thumbnail.
 			console.log('Loaded first 80 bytes of '+theFile.name);
-            console.dir(e);
-            return;
 			if(e.target.result === 'solid') {
 				console.log('File is ASCII');
 				readAsASCII(theFile,callback);
 			} else {
 				console.log('File is binary');
-				readAsBinary(theFile,callback);
 			}
 		};
 	})(file);
@@ -32,6 +29,7 @@ _parseStl.parseStl=function(file,callback) {
 	// Read in the STL file as binary data for the first 5 bytes.
 	//	in ASCII the first portion should be the string 'solid'
 	var blob = file.slice(0,5);
+    console.log(file);
 	typeReader.readAsBinaryString(blob);
 }
 

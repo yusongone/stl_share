@@ -5,28 +5,110 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
         <script src="/public/js/vendor/jquery-2.1.1.min.js"></script>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r67/three.min.js"></script>
-        <script src="/public/js/vendor/stats.js"></script>
-        <script src="/public/js/vendor/OrbitControls.js"></script>
-        <script src="/public/js/parse_stl.js"></script>
-        <script src="/public/js/index.js"></script>
-        <style>
-            body {
-                font-family: Monospace;
-                background-color: #f0f0f0;
-                margin: 0px;
-                overflow: hidden;
-            }
+        <style rel="stylesheet">
+            *{margin:0;padding:0;color:#666;list-style:none;}
+            input{height:18px;line-height:18px;}
+            .head{height:45px;background:#ddd;}
+            .banner{margin-top:10px;width:100%;height:300px;border:1px solid #ddd;box-sizing:border-box;border-radius:5px;}
+            label{font-size:14px;}
+            .btn{border-radius:5px;cursor:pointer;}
+
+
+            .topBar,.page{width:900px;margin:0 auto;overflow:hidden;}
+            .logoBox{float:left;width:100px;margin:10px;font-size:20px;}
+            .nav{float:left;width:500px;}
+            .searchBox{float:right;margin-top:10px;}
+            .searchBox input{float:left;}
+            .searchBox .btn{float:right;border:1px solid #000;margin:1px 5px 0 5px;}
+            .nav{float:left;margin-top:10px;}
+            .nav ul{float:left;}
+            .nav ul li{float:left;margin:0 10px;}
+
+            .showList{width:100%;min-height:500px;margin-top:10px;background:#ddd;border-radius:5px;float:left;padding-bottom:15px;}
+            .showList .title{float:left;margin:5px;}
+            .showList .imgList{float:left;width:2000px;}
+            .showList .imgList li{float:left;width:180px;height:180px;border:1px solid #000;margin-left:10px;}
+            .showList .listBox{width:100%;overflow-x:hidden;float:left;}
+            .showList .group{position:relative;margin-top:10px;float:left;width:100%;}
+            .showList .prev,.showList .next{top:50%;margin-top:-25px;position:absolute;width:45px;height:45px;background:#ddd;opacity:0.9;border:1px solid #000;}
+            .showList .prev{left:0px;}
+            .showList .next{right:0px;}
+
+            .footer{width:100%;height:110px;background:#aaa;margin-top:10px;}
         </style>
-    </head>
         <script>
 
         </script>
+    </head>
     <body>
+        <div class="head">
+            <div class="topBar">
+                <div class="logoBox">
+                    LOGO
+                </div>
+                <div class="nav">
+                    <ul>
+                        <li>分类</li>
+                        <li>个人中心</li>
+                    </ul>
+                </div>
+                <div class="searchBox">
+                    <input />
+                    <div class="btn">搜</div>
+                </div>
+            </div>
+        </div>
         <div class="page">
-            <input type="file" value="选择文件" id="file"/>
-            <div id="window">
+            <div class="banner"></div>
+            <div class="showList">
+                <div class="group">
+                    <div class="title">猜您喜欢</div>
+                    <div class="listBox">
+                        <div class="prev"></div>
+                        <ul class="imgList">
+                            <li><a><img/></a></li>
+                            <li><a><img/></a></li>
+                            <li><a><img/></a></li>
+                            <li><a><img/></a></li>
+                            <li><a><img/></a></li>
+                            <li><a><img/></a></li>
+                        </ul>
+                        <div class="next"></div>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="title">最近热门</div>
+                    <div class="listBox">
+                        <div class="prev"></div>
+                        <ul class="imgList">
+                            <li><a><img/></a></li>
+                            <li><a><img/></a></li>
+                            <li><a><img/></a></li>
+                            <li><a><img/></a></li>
+                            <li><a><img/></a></li>
+                            <li><a><img/></a></li>
+                        </ul>
+                        <div class="next"></div>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="title">Logo推荐</div>
+                    <div class="listBox">
+                        <ul class="imgList">
+                            <li><a><img/></a></li>
+                            <li><a><img/></a></li>
+                            <li><a><img/></a></li>
+                            <li><a><img/></a></li>
+                            <li><a><img/></a></li>
+                            <li><a><img/></a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div> 
+        <div class="footer">
+            <div class="footerBar">
+            </div>
+        </div>
     </body>
 </html>

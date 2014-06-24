@@ -22,7 +22,7 @@ function createFloor(){
     var floor= new THREE.Line(geom,line_material);
     floor.type = THREE.LinePieces;
     floor.position.x=-100;
-    floor.position.y=0;
+    floor.position.z=-100;
     floor.rotation.x=(Math.PI/180)*90;
 
     window.floor=floor;
@@ -40,8 +40,9 @@ function bindEvent(){
         filereader.readAsArrayBuffer(file);
         filereader.onload=function(e){
             console.log(e);
-             // var   geo=ParseStl.parseStlBinary(e.target.result);
+             //var   geo=ParseStl.parseStlBinary(e.target.result);
                 ParseStl.parseStl(file,function(geo){
+                //ParseStl.parseStlBinary(file,function(geo){
                     var mesh=createAMesh(geo);
                     mesh.position.x = 0;
                     mesh.position.y = 0;
@@ -50,6 +51,7 @@ function bindEvent(){
                     mesh.rotation.y= 0;
                     mesh.rotation.x = -Math.PI/180*90;
                     scene.add(mesh);
+                    console.log('done parsing');
                 });
             };
         },false);
@@ -122,9 +124,9 @@ function initScene() {
     var floor=createFloor();
     scene.add(floor);
     
-
+    
     renderer = new THREE.WebGLRenderer({antialias:true}); 
-    //renderer = new THREE.CanvasRenderer();
+   //renderer = new THREE.CanvasRenderer();
     renderer.setSize( window.innerWidth, window.innerHeight );
     renderer.setClearColor(0xffffff, 1);
 
